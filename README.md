@@ -11,6 +11,7 @@ The goal of this project is to develop a computer vision-based model capable of 
 Several key challenges are anticipated in the development of this model:
 - Recognizing human gestures accurately from drone footage, where the angles and perspectives may vary greatly, will be a significant challenge.
 - While the MPII Human Pose Dataset provides a strong foundation, the poses captured in the dataset may not fully cover the gestures we require for drone control. Additionally, recognizing poses from aerial drone footage introduces variability in pose appearance due to changes in camera angle and altitude.
+- The model must detect and recognize specific gestures. So we are not just building a model to detect a human, but also to be sensitive to specific gestures to control our drone. 
 
 ### Datasets
 I plan to use a combination of existing datasets and our own custom drone data. 
@@ -23,3 +24,8 @@ I will primarily rely on the MPII dataset for training and validation. The drone
 
 ### Solution
 
+The high-level approach to solving this project involves a combination of pose estimation and gesture classification.
+
+**Pose Estimation:** The first step to recognizing gestures can be to detect and localize human joints. Since body posture and hand placement are critical in my project, pose estimation techniques will be critical. I will use methods like OpenPose or MediaPipe to identify key body joints. 
+
+**Correlation Filters:** Inspired by the work of David Bolme, correlation filters are an efficient method for gesture detection in drone footage. The idea is to learn kernels that maximize the response for specific patterns within an frame, highlighting regions that likely contain the gesture of interest. These filters can isolate important gestures, similar to the head detection example we were given in class but tailored for a unique set of drone control gestures.

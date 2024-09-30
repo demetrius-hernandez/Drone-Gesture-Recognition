@@ -26,6 +26,6 @@ I will primarily rely on the MPII dataset for training and validation. The drone
 
 The high-level approach to solving this project involves a combination of pose estimation and gesture classification.
 
-**Pose Estimation:** The first step to recognizing gestures can be to detect and localize human joints. Since body posture and hand placement are critical in my project, pose estimation techniques will be critical. I will use methods like OpenPose or MediaPipe to identify key body joints. 
+- **Pose Estimation:** The first step to recognizing gestures can be to detect and localize human joints. Since body posture and hand placement are critical in my project, pose estimation techniques will be critical. I will use methods like OpenPose or MediaPipe to identify key body joints. 
 
-**Correlation Filters:** Inspired by the work of David Bolme, correlation filters are an efficient method for gesture detection in drone footage. The idea is to learn kernels that maximize the response for specific patterns within an frame, highlighting regions that likely contain the gesture of interest. These filters can isolate important gestures, similar to the head detection example we were given in class but tailored for a unique set of drone control gestures.
+- **Correlation Filters:** Inspired by the work of David Bolme, correlation filters are an efficient method for gesture detection in drone footage. The idea is to learn kernels that maximize the response for specific patterns within an frame, highlighting regions that likely contain the gesture of interest. These filters can isolate important gestures, similar to the head detection example we were given in class but tailored for a unique set of drone control gestures.

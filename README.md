@@ -37,7 +37,9 @@ The high-level approach to solving this project involves a combination of pose e
 
 - MPII Human Pose Dataset (train & validation set)
     - Download Link: [MPII Human Pose Dataset](http://human-pose.mpi-inf.mpg.de/)
-    - Associated paper: 2D Human Pose Estimation: New Benchmark and State of the Art Analysis" by Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele.
+    - Associated papers: 2D Human Pose Estimation
+        - New Benchmark and State of the Art Analysis by Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele.
+        - Fine-grained Activity Recognition with Holistic and Pose based Features by Leonid Pishchulin, Mykhaylo Andriluka and Bernt Schiele.
     - This dataset contains over 40,000 annotated images across 410 activities, making it suitable for training a gesture recognition model.
 - Custom Drone Footage (test set)
     - We plan to collect aerial drone footage featuring specific gestures needed for drone control: “release,” “move forward, backward, left, right” and “hover.” The footage will be recorded at various angles and altitudes to simulate real-world scenarios, making the dataset unique and tailored to this project.

@@ -29,3 +29,23 @@ The high-level approach to solving this project involves a combination of pose e
 - **Pose Estimation:** The first step to recognizing gestures can be to detect and localize human joints. Since body posture and hand placement are critical in my project, pose estimation techniques will be critical. I will use methods like OpenPose or MediaPipe to identify key body joints. 
 
 - **Correlation Filters:** Inspired by the work of David Bolme, correlation filters are an efficient method for gesture detection in drone footage. The idea is to learn kernels that maximize the response for specific patterns within an frame, highlighting regions that likely contain the gesture of interest. These filters can isolate important gestures, similar to the head detection example we were given in class but tailored for a unique set of drone control gestures.
+
+
+## Part 2: Data acquisition and preparation
+
+### Source of Data
+
+- MPII Human Pose Dataset (train & validation set)
+    - Download Link: [MPII Human Pose Dataset](http://human-pose.mpi-inf.mpg.de/)
+    - Associated paper: 2D Human Pose Estimation: New Benchmark and State of the Art Analysis" by Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele.
+    - This dataset contains over 40,000 annotated images across 410 activities, making it suitable for training a gesture recognition model.
+- Custom Drone Footage (test set)
+    - We plan to collect aerial drone footage featuring specific gestures needed for drone control: “release,” “move forward, backward, left, right” and “hover.” The footage will be recorded at various angles and altitudes to simulate real-world scenarios, making the dataset unique and tailored to this project.
+    - Each image was extracted from YouTube videos. 
+
+### Data Split Strategy 
+
+- **Training Set:** From the MPII Human Pose Dataset, includes a wide range of human activities and poses in varied environments, lighting conditions, and body occlusions
+- **Validation Set:** A subset of this data will be selected that closely resembles gestures similar to those needed for drone control. However, slight differences will be intentionally preserved to ensure the validation set is not too similar to the training set. This setup helps prevent overfitting and enables better generalization for this project.
+- **Test Set:** We will capture multiple subjects (about 5-10 individuals) performing the drone control gestures across different sessions to create our test set.
+

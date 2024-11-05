@@ -50,3 +50,16 @@ The high-level approach to solving this project involves a combination of pose e
 - **Validation Set:** A subset of this data will be selected that closely resembles gestures similar to those needed for drone control. However, slight differences will be intentionally preserved to ensure the validation set is not too similar to the training set. This setup helps prevent overfitting and enables better generalization for this project.
 - **Test Set:** We will capture multiple subjects (about 5-10 individuals) performing the drone control gestures across different sessions to create our test set.
 
+## Part 3: First update
+
+### Data pre-processing and feature extraction
+
+Media-pipe
+
+### Why you decide to use these algorithms
+
+some description
+
+### Demonstrating processed trained data
+
+https://drive.google.com/file/d/1EQn0DPFEtWbPe15KU32wNelTMklKSBkS/view

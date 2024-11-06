@@ -69,9 +69,9 @@ The high-level approach to solving this project involves a combination of pose e
 
 ### Why Did I Decide To Use These Algorithms
 
-- YOLO for Detection: YOLO is a well-known object detection model that is efficient and accurate. Given that drone footage may have dynamic backgrounds and varying angles, YOLO’s ability to detect humans in these conditions is crucial. By narrowing down to high-confidence detections, it reduces false positives, focusing on frames with clear human presence.
-- MediaPipe for Pose Estimation: MediaPipe is chosen for its real-time pose estimation capabilities. Unlike some other methods that may require significant computational resources, MediaPipe efficiently provides landmark detection and can handle variations in poses and orientations typical in drone footage.
-- Angle and Normalization-Based Pose Detection: Calculating angles between joints allows for robust pose classification. Normalizing distances by shoulder width further improves pose detection across varying scales and distances, accommodating variations in altitude and angle specific to aerial footage.
+- **YOLO for Detection:** YOLO is a well-known object detection model that is efficient and accurate. Given that drone footage may have dynamic backgrounds and varying angles, YOLO’s ability to detect humans in these conditions is crucial. By narrowing down to high-confidence detections, it reduces false positives, focusing on frames with clear human presence.
+- **MediaPipe for Pose Estimation:** MediaPipe is chosen for its real-time pose estimation capabilities. Unlike some other methods that may require significant computational resources, MediaPipe efficiently provides landmark detection and can handle variations in poses and orientations typical in drone footage.
+- **Angle and Normalization-Based Pose Detection:** Calculating angles between joints allows for robust pose classification. Normalizing distances by shoulder width further improves pose detection across varying scales and distances, accommodating variations in altitude and angle specific to aerial footage.
 
 ### Demonstrating
 

@@ -52,14 +52,31 @@ The high-level approach to solving this project involves a combination of pose e
 
 ## Part 3: First update
 
-### Data pre-processing and feature extraction
+### Data Pre-Processing and Feature Extraction
 
-Media-pipe
+#### Data Pre-Processing
 
-### Why you decide to use these algorithms
+- **YOLO Model for Person Detection:** The code utilizes a YOLO model to detect people in each frame. The model filters out detections based on confidence scores and person class IDs, helping to focus only on frames containing a person.
+- **Cropping Detected Person:** Once a person is detected, the code extracts the region containing the person to simplify subsequent pose analysis and reduce background noise.
+- **MediaPipe for Pose Estimation:** MediaPipe is used to process the cropped images, detecting key body landmarks (e.g., shoulders, elbows, wrists)
 
-some description
+#### Feature Extraction
 
-### Demonstrating processed trained data
+- **Landmark Extraction:** Specific body landmarks, such as shoulders, elbows, and wrists, are extracted to calculate joint angles and determine relative positions.
+- **Angle Calculations:** The code computes angles between shoulders, elbows, and wrists to determine poses like the T-pose or touchdown pose.
+- **Distance Normalization:** Shoulder width is calculated to normalize distances between key points, which is important for consistent detection across different scales.
+- **Pose Detection Thresholding:** Horizontal and vertical alignment thresholds help distinguish different poses (e.g., T-pose, touchdown) based on arm positions.
+
+### Why Did I Decide To Use These Algorithms
+
+- YOLO for Detection: YOLO is a well-known object detection model that is efficient and accurate. Given that drone footage may have dynamic backgrounds and varying angles, YOLO’s ability to detect humans in these conditions is crucial. By narrowing down to high-confidence detections, it reduces false positives, focusing on frames with clear human presence.
+- MediaPipe for Pose Estimation: MediaPipe is chosen for its real-time pose estimation capabilities. Unlike some other methods that may require significant computational resources, MediaPipe efficiently provides landmark detection and can handle variations in poses and orientations typical in drone footage.
+- Angle and Normalization-Based Pose Detection: Calculating angles between joints allows for robust pose classification. Normalizing distances by shoulder width further improves pose detection across varying scales and distances, accommodating variations in altitude and angle specific to aerial footage.
+
+### Demonstrating
 
 https://drive.google.com/file/d/1EQn0DPFEtWbPe15KU32wNelTMklKSBkS/view
+
+### Future Plans
+
+I plan to change the pose classification to be a neural network. We have a demo of my labs drone capabilites in Oklahoma starting on Nov 9th, so I just use the "math" code to get it to work for the demo. I can compare the neural network against this "brute force method". 

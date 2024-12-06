@@ -83,5 +83,42 @@ In the current phase of the project, we are using a threshold-based classificati
 
 Looking ahead, I plan to transition the pose classification method to a neural network model. This upgrade will allow for more nuanced and accurate gesture recognition, as the network will be capable of learning and generalizing complex pose variations that are challenging to capture with hard-coded thresholds. After the demo, I will conduct a performance comparison between this initial threshold-based approach and the neural network model, assessing improvements in detection accuracy, robustness, and real-time processing efficiency, particularly within dynamic drone footage.
 
-## Part 3: Second update
+## Part 4: Second update
 
+### Justification of the Choice of Classifier
+
+The final solution I created two classifiers: a Support Vector Machine (SVM) and a Dense Neural Network (DNN). Both classifiers were chosen for their unique strengths and suitability for the specific requirements of the gesture recognition task.
+
+#### Why SVM with RBF kernel? 
+
+- nonlinearity
+- SVC(kernel='rbf', gamma='scale', C=1.0)
+
+#### Why a DNN
+
+- Testing robustness
+- 64 hidden units with ReLU activation
+
+### Classification Accuracy
+- SVM Classification Performance
+- DNN Classification Performance
+- videos of both
+
+Both classifiers were validated on unseen drone footage in .mp4 format, and they correctly identified all gestures, further validating their generalization capabilities.
+
+### Commentary on Accuracy and Ideas for Improvements
+
+The observed perfect accuracies on both classifiers are promising but could indicate potential overfitting, especially considering the high dimensionality of the BODY25 keypoint data and the augmentation techniques used. The following considerations and improvements are proposed:
+
+- Data Augmentation Validation:
+    - While augmentation ensures robust training, it may inadvertently create synthetic data that is overly simplified or unrealistic. A thorough evaluation of the augmented data distribution compared to real-world drone footage could highlight discrepancies.
+- Cross-validation:
+    - Conduct k-fold cross-validation to evaluate model stability across various splits of training and validation data, providing a more robust assessment of generalization.
+- Lightweight Model for Real-time Deployment:
+    - The current DNN, while effective, could be optimized further for real-time deployment on drones with limited computational resources. Techniques such as model quantization or pruning could be considered.
+    - Using Arturos yolo model. See if we is just using a bounding box. see if we can take the classes and train our data to get the gestures classifications…what he is using a class label.
+ 
+### Implementation Notes
+- Keypoint Conversion: Mediapipe output is converted to match OpenPose's BODY25 format to ensure compatibility with both the training data and real-time drone footage.
+- Normalization: All keypoint coordinates are scaled to the range [0, 1] to account for variations in drone altitude and subject distance from the camera.
+- Data Augmentation: The training dataset is augmented with transformations (scaling, rotation, translation, and noise addition) to increase robustness and balance class representation.

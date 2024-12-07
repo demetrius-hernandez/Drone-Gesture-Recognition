@@ -184,6 +184,8 @@ While the near perfect accuracy scores are encouraging, they raise the question 
 - The dataset might not fully represent the complexity of real-world drone footage, and our models are overfitting to this controlled scenarios.
 - The feature representation (BODY25 keypoints plus normalization) may be too "clean," making the classification task simpler than expected.
 - Our augmentation strategies or data splits may not accurately reflect the complexities of the intended real-world environment.
+-  **Performance on Real Drone Footage:**
+I tested the model on the actual drone-collected footage, which had been held out during training, to evaluate its accuracy in real-world conditions. A drop in accuracy would have indicated a potential gap between the training/validation scenarios and the real-world application, requiring adjustments to the model architecture or the addition of more drone-collected training samples. However, in this case, the model maintained high accuracy on the drone footage. Every frame, as assessed through a manual review, was classified correctly, suggesting that the model generalizes well to real-world scenarios.
 
 #### Proposed Improvements:
 
@@ -192,9 +194,6 @@ Introduce more challenging validation sets with varied lighting, subjects wearin
 
 - **Cross-Validation:**
 Implement k-fold cross-validation to assess stability and generalization. If performance drops on different folds, it will highlight overfitting.
-
-- **Performance on Real Drone Footage:**
-Test the model on the actual drone-collected footage (currently held out) to see if accuracy remains high in real-world conditions. If it drops, this indicates a gap between our training/validation scenarios and reality. Adjusting the model architecture or adding more drone-collected training samples might help.
 
 - **Lightweight Models:**
 For real-time drone deployment, consider making the models smaller (pruning) or techniques to run inference efficiently on limited hardware.

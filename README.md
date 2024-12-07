@@ -85,14 +85,34 @@ Looking ahead, I plan to transition the pose classification method to a neural n
 
 ## Part 4: Second update
 
+In this section, I present the completed solution along with classification experiments, justification for the chosen classifiers, evaluation metrics on both training and validation sets, and ideas for future improvements.
+
 ### Justification of the Choice of Classifier
 
-The final solution I created two classifiers: a Support Vector Machine (SVM) and a Dense Neural Network (DNN). Both classifiers were chosen for their unique strengths and suitability for the specific requirements of the gesture recognition task.
+For this stage of the project, I experimented with two classifiers to handle the gesture recognition task: a Support Vector Machine (SVM) with an RBF kernel and a Dense Neural Network (DNN).
 
-#### Why SVM with RBF kernel? 
+- SVM with RBF Kernel
+    - I chose an SVM with an RBF kernel because the BODY25 keypoint data is essentially a set of coordinates and potentially complex pose patterns. An SVM with an RBF kernel can model these complex relationships without requiring a large amount of training data. It also tends to provide good generalization and can be more robust to small datasets or limited feature sets.
 
-- nonlinearity
-- SVC(kernel='rbf', gamma='scale', C=1.0)
+- Dense Neural Network (DNN)
+    - The DNN was chosen to test the robustness and generalization capabilities of a neural model. Neural networks can learn complex, non-linear mappings from inputs (keypoint coordinates) to class labels (gestures). By using several dense layers with ReLU activations, the DNN can capture subtle variations in human poses. This approach is easily scalable for additional classes and can be fine-tuned if new gestures or more complex scenarios are introduced.
+ 
+Together, these classifiers serve as complementary approaches—SVM offers a strong, well-understood baseline, while the DNN provides the flexibility and scalability that might be needed for more complex real-world scenarios under a black-box.
+
+### Classification Accuracy and Evaluation Metrics
+
+For this project, I used a combination of metrics to evaluate the performance:
+
+- **Precision, Recall, and F1-Score:** These metrics provide a detailed view of classification performance on each gesture class, showing how often gestures are correctly identified and how often the model confuses one gesture with another.
+- **Confusion Matrix:** Helps visualize the distribution of predictions across classes.
+- **Accuracy:** Gives a quick summary of overall performance.
+
+#### Performance on Training and Validation Subsets
+
+
+##### SVM with RBF Kernel:
+
+Training accuracy also reached ~100%, suggesting that the SVM was able to perfectly fit the training set as well.
 
 The Classification Report for the SVM:
 
@@ -104,7 +124,7 @@ The Classification Report for the SVM:
 | T-pose             | 1.00      | 1.00   | 1.00     | 1006    |
 | Traffic All Stop   | 1.00      | 1.00   | 1.00     | 1142    |
 |                    |           |        |          |         |
-| **Accuracy**       | **1.00**  |        |          | **5264**|
+| **Accuracy**       |   1.00    |        |          |   5264  |
 | **Macro Avg**      | 1.00      | 1.00   | 1.00     | 5264    |
 | **Weighted Avg**   | 1.00      | 1.00   | 1.00     | 5264    |
 
@@ -118,10 +138,11 @@ The confusion matrix for the SVM classifier:
 |   T-pose             | 0              | 0                | 0     | 1006   | 0                |
 |   Traffic All Stop   | 0              | 0                | 0     | 0      | 1142             |
 
-#### Why a DNN
+The confusion matrix shows almost no misclassifications on the data, indicating a ~100% accuracy.
 
-- Testing robustness
-- 64 hidden units with ReLU activation
+##### Dense Neural Network:
+
+The DNN also achieved ~100% accuracy during training, indicating that it effectively learned the training data patterns.
 
 The Classification Report for the DNN:
 
@@ -147,6 +168,57 @@ The confusion matrix for the DNN classifier:
 | Stand           | 0               | 1                | 1041  | 0      | 0                |
 | T-pose          | 0               | 0                | 0     | 1006   | 0                |
 | Traffic All Stop| 0               | 0                | 0     | 0      | 1142             |
+
+The confusion matrix shows almost no misclassifications on the data, indicating a ~100% accuracy.
+
+### Commentary on Accuracy and Ideas for Improvements
+
+While the near perfect accuracy scores are encouraging, they raise the question of overfitting. Such results suggest that either:
+
+- The dataset might not fully represent the complexity of real-world drone footage, and our models are overfitting to this controlled scenarios.
+- The feature representation (BODY25 keypoints plus normalization) may be too "clean," making the classification task simpler than expected.
+- Our augmentation strategies or data splits may not accurately reflect the complexities of the intended real-world environment.
+
+#### Proposed Improvements:
+
+- **More Realistic Validation Data:**
+Introduce more challenging validation sets with varied lighting, subjects wearing different clothing, and background clutter. This would help ensure that the classifier generalizes beyond the current dataset.
+
+- **Cross-Validation:**
+Implement k-fold cross-validation to assess stability and generalization. If performance drops on different folds, it will highlight overfitting.
+
+- **Performance on Real Drone Footage:**
+Test the model on the actual drone-collected footage (currently held out) to see if accuracy remains high in real-world conditions. If it drops, this indicates a gap between our training/validation scenarios and reality. Adjusting the model architecture or adding more drone-collected training samples might help.
+
+- **Lightweight Models:**
+For real-time drone deployment, consider making the models smaller (pruning) or techniques to run inference efficiently on limited hardware.
+
+- Explore Arturo's (my labmate) YOLO model to determine if it primarily uses bounding boxes for object detection. Investigate whether the model's class labels can be adapted or extended to train and classify specific gestures for our dataset. This approach would allow us to only have to deploy the existing yolo model on our drones. 
+ 
+### Implementation Notes
+- Keypoint Conversion: Mediapipe output is converted to match OpenPose's BODY25 format to ensure compatibility with the drone footage.
+- Normalization: All keypoint coordinates are scaled to the range [0, 1]
+- Data Augmentation: The training dataset is augmented with transformations (scaling, rotation, translation, and noise addition) to increase robustness and balance class representation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Commentary on Accuracy and Ideas for Improvements

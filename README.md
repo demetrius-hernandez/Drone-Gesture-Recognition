@@ -94,17 +94,60 @@ The final solution I created two classifiers: a Support Vector Machine (SVM) and
 - nonlinearity
 - SVC(kernel='rbf', gamma='scale', C=1.0)
 
+The Classification Report for the SVM:
+
+| Class              | Precision | Recall | F1-Score | Support |
+|--------------------|-----------|--------|----------|---------|
+| Left Arm Raised    | 1.00      | 1.00   | 1.00     | 1068    |
+| Right Arm Raised   | 1.00      | 1.00   | 1.00     | 1006    |
+| Stand              | 1.00      | 1.00   | 1.00     | 1042    |
+| T-pose             | 1.00      | 1.00   | 1.00     | 1006    |
+| Traffic All Stop   | 1.00      | 1.00   | 1.00     | 1142    |
+|                    |           |        |          |         |
+| **Accuracy**       | **1.00**  |        |          | **5264**|
+| **Macro Avg**      | 1.00      | 1.00   | 1.00     | 5264    |
+| **Weighted Avg**   | 1.00      | 1.00   | 1.00     | 5264    |
+
+The confusion matrix for the SVM classifier:
+
+|                     | Left Arm Raised | Right Arm Raised | Stand | T-pose | Traffic All Stop |
+|----------------------|-----------------|------------------|-------|--------|------------------|
+|   Left Arm Raised    | 1068           | 0                | 0     | 0      | 0                |
+|   Right Arm Raised   | 0              | 1005             | 1     | 0      | 0                |
+|   Stand              | 0              | 0                | 1042  | 0      | 0                |
+|   T-pose             | 0              | 0                | 0     | 1006   | 0                |
+|   Traffic All Stop   | 0              | 0                | 0     | 0      | 1142             |
+
 #### Why a DNN
 
 - Testing robustness
 - 64 hidden units with ReLU activation
 
-### Classification Accuracy
-- SVM Classification Performance
-- DNN Classification Performance
-- videos of both
+The Classification Report for the DNN:
 
-Both classifiers were validated on unseen drone footage in .mp4 format, and they correctly identified all gestures, further validating their generalization capabilities.
+| Class               | Precision | Recall | F1-Score | Support |
+|---------------------|-----------|--------|----------|---------|
+| Left Arm Raised     | 1.00      | 1.00   | 1.00     | 1068    |
+| Right Arm Raised    | 1.00      | 1.00   | 1.00     | 1006    |
+| Stand               | 1.00      | 1.00   | 1.00     | 1042    |
+| T-pose              | 1.00      | 1.00   | 1.00     | 1006    |
+| Traffic All Stop    | 1.00      | 1.00   | 1.00     | 1142    |
+|                     |           |        |          |         |
+| **Accuracy**        |           |        | 1.00     | 5264    |
+| **Macro Avg**       | 1.00      | 1.00   | 1.00     | 5264    |
+| **Weighted Avg**    | 1.00      | 1.00   | 1.00     | 5264    |
+
+
+The confusion matrix for the DNN classifier:
+
+|                 | Left Arm Raised | Right Arm Raised | Stand | T-pose | Traffic All Stop |
+|-----------------|-----------------|------------------|-------|--------|------------------|
+| Left Arm Raised | 1068            | 0                | 0     | 0      | 0                |
+| Right Arm Raised| 0               | 1004             | 2     | 0      | 0                |
+| Stand           | 0               | 1                | 1041  | 0      | 0                |
+| T-pose          | 0               | 0                | 0     | 1006   | 0                |
+| Traffic All Stop| 0               | 0                | 0     | 0      | 1142             |
+
 
 ### Commentary on Accuracy and Ideas for Improvements
 

@@ -114,6 +114,8 @@ For this project, I used a combination of metrics to evaluate the performance:
 
 ##### SVM with RBF Kernel:
 
+Example of the SVM on real drone data: [https://drive.google.com/file/d/1TzSEVmxbjz-hQy4rHJIxNSJCbq0ZOnCp/view?usp=sharing](https://drive.google.com/file/d/1TzSEVmxbjz-hQy4rHJIxNSJCbq0ZOnCp/view?usp=sharing)
+
 Training accuracy also reached ~100%, suggesting that the SVM was able to perfectly fit the training set as well.
 
 The Classification Report for the SVM:
@@ -143,6 +145,8 @@ The confusion matrix for the SVM classifier:
 The confusion matrix shows almost no misclassifications on the data, indicating a ~100% accuracy.
 
 ##### Dense Neural Network:
+
+Example of the DNN on real drone data: [https://drive.google.com/file/d/1ptyfryyE0CmfNhRG2dsAQmgExcALm061/view?usp=sharing](https://drive.google.com/file/d/1ptyfryyE0CmfNhRG2dsAQmgExcALm061/view?usp=sharing)
 
 The DNN also achieved ~100% accuracy during training, indicating that it effectively learned the training data patterns.
 
@@ -200,42 +204,4 @@ For real-time drone deployment, consider making the models smaller (pruning) or 
 ### Implementation Notes
 - Keypoint Conversion: Mediapipe output is converted to match OpenPose's BODY25 format to ensure compatibility with the drone footage.
 - Normalization: All keypoint coordinates are scaled to the range [0, 1]
-- Data Augmentation: The training dataset is augmented with transformations (scaling, rotation, translation, and noise addition) to increase robustness and balance class representation.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Commentary on Accuracy and Ideas for Improvements
-
-The observed perfect accuracies on both classifiers are promising but could indicate potential overfitting, especially considering the high dimensionality of the BODY25 keypoint data and the augmentation techniques used. The following considerations and improvements are proposed:
-
-- Data Augmentation Validation:
-    - While augmentation ensures robust training, it may inadvertently create synthetic data that is overly simplified or unrealistic. A thorough evaluation of the augmented data distribution compared to real-world drone footage could highlight discrepancies.
-- Cross-validation:
-    - Conduct k-fold cross-validation to evaluate model stability across various splits of training and validation data, providing a more robust assessment of generalization.
-- Lightweight Model for Real-time Deployment:
-    - The current DNN, while effective, could be optimized further for real-time deployment on drones with limited computational resources. Techniques such as model quantization or pruning could be considered.
-    - Using Arturos yolo model. See if we is just using a bounding box. see if we can take the classes and train our data to get the gestures classifications…what he is using a class label.
- 
-### Implementation Notes
-- Keypoint Conversion: Mediapipe output is converted to match OpenPose's BODY25 format to ensure compatibility with both the training data and real-time drone footage.
-- Normalization: All keypoint coordinates are scaled to the range [0, 1] to account for variations in drone altitude and subject distance from the camera.
 - Data Augmentation: The training dataset is augmented with transformations (scaling, rotation, translation, and noise addition) to increase robustness and balance class representation.

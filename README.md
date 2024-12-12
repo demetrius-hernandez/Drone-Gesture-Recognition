@@ -233,4 +233,9 @@ To demonstrate the project’s functionality, I prepared a short video showcasin
 - Pipeline Overview: A brief explanation of how the YOLO model detects individuals, MediaPipe extracts keypoints, and the classifier predicts gestures.
 - Real-World Testing: Footage of drone-collected gesture sequences being classified in real-time, including examples of correct classifications and edge cases.
 
-The video demonstration is available [here]. In the video, the individual begins by holding a Touchdown pose for 3 seconds, followed by a T-pose for 3 seconds, which signals the drop of medical equipment. Next, the individual raises their left hand for 3 seconds and their right hand for 3 seconds, representing the command to fly upward. These commands are basic examples and will be enhanced with additional gestures in the future. This demonstration showcases the current capabilities for this class. Note that the animations in the video were manually performed for demonstration purposes.
+The video demonstration is available here:
+
+[https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing](https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing)
+
+
+In the video, the individual begins by holding a Touchdown pose for 3 seconds, followed by a T-pose for 3 seconds, which signals the drop of medical equipment. Next, the individual raises their left hand for 3 seconds and their right hand for 3 seconds, representing the command to fly upward. These commands are basic examples and will be enhanced with additional gestures in the future. This demonstration showcases the current capabilities for this class. Note that the animations in the video were manually performed for demonstration purposes.

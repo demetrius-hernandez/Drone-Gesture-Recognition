@@ -205,7 +205,32 @@ For real-time drone deployment, consider making the models smaller (pruning) or 
 - Normalization: All keypoint coordinates are scaled to the range [0, 1]
 - Data Augmentation: The training dataset is augmented with transformations (scaling, rotation, translation, and noise addition) to increase robustness and balance class representation.
 
-
 ## Part 5: Final Update
 
 
+### Description of Unseen Data
+
+For the final evaluation, I collected a test dataset comprising drone footage of individuals performing a sequence of predefined gestures. This footage was captured using a drone camera, introducing real-world challenges such as variations in lighting, angles, and altitudes (although I was careful to limit the variance caused by these variables). The set consists of different gesture sequences, with each sequence lasting between 4-6 seconds and containing combinations of gestures that correspond to specific drone commands.
+
+### Differences from Training/Test/Validation Sets
+
+- **Perspective:** The training/test/validation datasets primarily consisted of keypoints derived from static, ground-level images. In contrast, this unseen dataset features aerial drone footage, which introduces perspective distortion and changes in the appearance of gestures.
+
+### Observed Errors
+- **Ambiguous Gestures:** Some misclassifications occurred due to gestures that were not part of the training set but resembled existing classes. For instance, when a subject raised both hands straight up, the model classified it as Traffic All Stop.
+
+### Proposed Improvements (before we actually put this on our drones)
+
+- Adding an Unknown Gesture Class: Introduce an “unknown” gesture class to handle cases where the input does not match any predefined gesture. This would improve robustness without significantly reducing overall performance.
+- Enhanced Training Data: Include additional samples in the training set with: Simulated occlusions and lighting variations. Gestures performed at varying angles and distances from the camera.
+- Model Architecture Adjustments: Fine-tune the YOLO model to detect not just bounding boxes but also specific gesture-related features.
+- Post-Processing: Implement a confidence threshold for classification. For gestures with low confidence, classify them as “unknown” or request re-performance.
+
+### Presentation Materials
+
+To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the test set. The video includes:
+
+- Pipeline Overview: A brief explanation of how the YOLO model detects individuals, MediaPipe extracts keypoints, and the classifier predicts gestures.
+- Real-World Testing: Footage of drone-collected gesture sequences being classified in real-time, including examples of correct classifications and edge cases.
+
+The video is available here and has been optimized for clarity and conciseness to engage a non-technical audience.

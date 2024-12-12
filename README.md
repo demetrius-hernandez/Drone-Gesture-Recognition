@@ -204,3 +204,8 @@ For real-time drone deployment, consider making the models smaller (pruning) or 
 - Keypoint Conversion: Mediapipe output is converted to match OpenPose's BODY25 format to ensure compatibility with the drone footage.
 - Normalization: All keypoint coordinates are scaled to the range [0, 1]
 - Data Augmentation: The training dataset is augmented with transformations (scaling, rotation, translation, and noise addition) to increase robustness and balance class representation.
+
+
+## Part 5: Final Update
+
+

@@ -234,18 +234,15 @@ However, the model can be improved a lot, which you can see in the following poi
 ### Proposed Improvements (before we actually put this on our drones)
 
 - Adding an Unknown Gesture Class: Introduce an “unknown” gesture class to handle cases where the input does not match any predefined gesture. This would improve robustness without significantly reducing overall performance.
-- Enhanced Training Data: Include additional samples in the training set with: Simulated occlusions and lighting variations. Gestures performed at varying angles and distances from the camera.
+- Enhanced Training Data: Include additional samples in the training set with: Simulated occlusions and lighting variations, gestures performed at varying angles and distances from the camera.
 - Model Architecture Adjustments: Fine-tune the YOLO model to detect not just bounding boxes but also specific gesture-related features.
 - Post-Processing: Implement a confidence threshold for classification. For gestures with low confidence, classify them as “unknown” or request re-performance.
 
 ### Presentation Materials
 
-To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the test set. The video includes:
+- Pipeline Overview ---TODO---: A brief explanation of how the YOLO model detects individuals, MediaPipe extracts keypoints, and the classifier predicts gestures.
 
-- Pipeline Overview: A brief explanation of how the YOLO model detects individuals, MediaPipe extracts keypoints, and the classifier predicts gestures.
-- Real-World Testing: Footage of drone-collected gesture sequences being classified in real-time, including examples of correct classifications and edge cases.
-
-The video demonstration is available here:
+- To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the unseen test set. The video demonstration is available here:
 
 [https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing](https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing)
 

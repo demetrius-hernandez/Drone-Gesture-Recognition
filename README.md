@@ -219,8 +219,8 @@ For the final evaluation, I collected a test dataset comprising drone footage of
 
 The results indicated minimal differences between the training/validation performance and the unseen dataset accuracy. This consistency suggests that while the model is likely overfitting to the training data, the poses in this dataset are distinct enough for the overfitting to have little practical effect. However, this may not hold as the complexity of gestures increases. For example:
 
-- Similar Gestures: If future gestures have subtler distinctions (e.g., slight hand movements), overfitting to specific angles or body positions could lead to misclassification.
-- Occluded Points: As occlusions increase in more complex poses, the model might struggle without additional training data or more advanced augmentation strategies.
+- **Similar Gestures:** If future gestures have subtler distinctions (e.g., slight hand movements), overfitting to specific angles or body positions could lead to misclassification.
+- **Occluded Points:** As occlusions increase in more complex poses, the model might struggle without additional training data or more advanced augmentation strategies.
 
 ### Observed Errors
 - **Ambiguous Gestures:** Some misclassifications occurred due to gestures that were not part of the training set but resembled existing classes. For instance, when a subject raised both hands straight up, the model classified it as Traffic All Stop.
@@ -233,14 +233,14 @@ However, the model can be improved a lot, which you can see in the following poi
 
 ### Proposed Improvements (before we actually put this on our drones)
 
-- Adding an Unknown Gesture Class: Introduce an “unknown” gesture class to handle cases where the input does not match any predefined gesture. This would improve robustness without significantly reducing overall performance.
-- Enhanced Training Data: Include additional samples in the training set with: Simulated occlusions and lighting variations, gestures performed at varying angles and distances from the camera.
-- Model Architecture Adjustments: Fine-tune the YOLO model to detect not just bounding boxes but also specific gesture-related features.
-- Post-Processing: Implement a confidence threshold for classification. For gestures with low confidence, classify them as “unknown” or request re-performance.
+- **Adding an Unknown Gesture Class:** Introduce an “unknown” gesture class to handle cases where the input does not match any predefined gesture. This would improve robustness without significantly reducing overall performance.
+- **Enhanced Training Data:** Include additional samples in the training set with: Simulated occlusions and lighting variations, gestures performed at varying angles and distances from the camera.
+- **Model Architecture Adjustments:** Fine-tune the YOLO model to detect not just bounding boxes but also specific gesture-related features.
+- **Post-Processing:** Implement a confidence threshold for classification. For gestures with low confidence, classify them as “unknown” or request re-performance.
 
 ### Presentation Materials
 
-- Pipeline Overview ---TODO---: A brief explanation of how the YOLO model detects individuals, MediaPipe extracts keypoints, and the classifier predicts gestures.
+- **Pipeline Overview:**: I use a YOLO model, trained specifically for detecting people from drones, which I obtained from Arturo, my labmate. The YOLO model identifies bounding boxes around individuals in the drone footage. For each detected bounding box, I extract the corresponding region of the frame and pass it to MediaPipe for keypoint detection. MediaPipe outputs keypoints in the Body33 format, which I then convert to the Body25 format to match the input structure required by my classifier. Finally, I feed the transformed 25 keypoints into the classifier, which labels the frame based on the identified gesture.
 
 - To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the unseen test set. The video demonstration is available here:
 

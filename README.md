@@ -207,7 +207,6 @@ For real-time drone deployment, consider making the models smaller (pruning) or 
 
 ## Part 5: Final Update (in progress)
 
-
 ### Description of Unseen Data
 
 For the final evaluation, I collected a test dataset comprising drone footage of individuals performing a sequence of predefined gestures. This footage was captured using a drone camera, introducing real-world challenges such as variations in lighting, angles, and altitudes (although I was careful to limit the variance caused by these variables). The set consists of different gesture sequences, with each sequence lasting between 4-6 seconds and containing combinations of gestures that correspond to specific drone commands.
@@ -216,8 +215,21 @@ For the final evaluation, I collected a test dataset comprising drone footage of
 
 - **Perspective:** The training/test/validation datasets primarily consisted of keypoints derived from static, ground-level images. In contrast, this unseen dataset features aerial drone footage, which introduces perspective distortion and changes in the appearance of gestures.
 
+### Observed Overfitting and Implications
+
+The results indicated minimal differences between the training/validation performance and the unseen dataset accuracy. This consistency suggests that while the model is likely overfitting to the training data, the poses in this dataset are distinct enough for the overfitting to have little practical effect. However, this may not hold as the complexity of gestures increases. For example:
+
+- Similar Gestures: If future gestures have subtler distinctions (e.g., slight hand movements), overfitting to specific angles or body positions could lead to misclassification.
+- Occluded Points: As occlusions increase in more complex poses, the model might struggle without additional training data or more advanced augmentation strategies.
+
 ### Observed Errors
 - **Ambiguous Gestures:** Some misclassifications occurred due to gestures that were not part of the training set but resembled existing classes. For instance, when a subject raised both hands straight up, the model classified it as Traffic All Stop.
+
+### Why This Approach is Sufficietly Tested (but can be improved)
+
+I believe the final programs are sufficiently tested because they were evaluated on a separate, unseen dataset of real-world drone footage. This dataset simulates the intended deployment scenario by introducing natural variations in environment, lighting, and perspective. Moreover, the test data has been carefully crafted to include a representative range of gestures relevant to drone control. By keeping the test data entirely isolated during training, I ensured an unbiased evaluation of the model's performance, providing confidence that the results reflect its robustness and real-world applicability.
+
+However, the model can be improved a lot, which you can see in the following point. 
 
 ### Proposed Improvements (before we actually put this on our drones)
 

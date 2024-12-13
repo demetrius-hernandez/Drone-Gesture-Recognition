@@ -209,13 +209,15 @@ For real-time drone deployment, consider making the models smaller (pruning) or 
 
 ### Description of Unseen Data
 
-For the final evaluation, I collected a test dataset comprising drone footage of individuals performing a sequence of predefined gestures. This footage was captured using a drone camera, introducing real-world challenges such as variations in lighting, angles, and altitudes (although I was careful to limit the variance caused by these variables). The set consists of different gesture sequences, with each sequence lasting between 4-6 seconds and containing combinations of gestures that correspond to specific drone commands.
+For the final evaluation, I collected a test dataset comprising drone footage of individuals performing a sequence of predefined gestures. This footage was captured using a drone camera, introducing real-world challenges such as variations in lighting, angles, and altitudes. While I was careful to limit the variance caused by these factors, the dataset still reflects the complexity and unpredictability of a real-world deployment scenario. Each sequence in the dataset lasts between 4–6 seconds and includes combinations of gestures corresponding to specific drone commands. The gestures were chosen based on their relevance to typical drone operation tasks, such as signaling stops, directional movements, or equipment drops.
 
 ### Differences from Training/Test/Validation Sets
 
-- **Perspective:** The training/test/validation datasets primarily consisted of keypoints derived from static, ground-level images. In contrast, this unseen dataset features aerial drone footage, which introduces perspective distortion and changes in the appearance of gestures.
+The key distinction between the unseen dataset and the training/test/validation datasets is in the perspective. The training/test/validation data consists of keypoints extracted from static, ground-level images, while the unseen dataset features aerial drone footage. This shift in perspective introduces unique challenges, such as perspective distortion and changes in the appearance of gestures.
 
-I currently don’t have a Classification Report or Confusion Matrix for the unseen test set because I don’t have a fully annotated unseen test set to generate these metrics. My current train/test data is based on static keypoints, while the unseen data would ideally consist of real-world drone footage. Creating a robust unseen test set would require manually labeling the frames from this footage, which is a time-intensive process. However, based on qualitative analysis (and as demonstrated in the video at the end), the solution performs well, maintaining stable classifications and avoiding misclassifications.
+These differences highlight an important limitation of the initial training setup: while static keypoints from controlled settings are valuable for initial training and testing, they do not fully capture the complexities of real-world drone footage. To bridge this gap, the unseen dataset serves as a critical benchmark for evaluating the robustness of the model in practical applications.
+
+I currently don’t have a Classification Report or Confusion Matrix for the unseen test set because I don’t have a fully annotated unseen test set to generate these metrics. My current train/test data is based on static keypoints, while the unseen data would ideally consist of real-world drone footage. Creating a robust unseen test set would require manually labeling the frames from this footage, which is a time-intensive process requiring careful attention to detail. However, I have conducted qualitative evaluations of the model’s performance, and as demonstrated in the video at the end of this report, the solution performs well in practice. It maintains stable classifications and avoids misclassifications in most cases, which provides confidence in its applicability.
 
 ### Observed Overfitting and Implications
 
@@ -225,13 +227,14 @@ The results indicated minimal differences between the training/validation perfor
 - **Occluded Points:** As occlusions increase in more complex poses, the model might struggle without additional training data or more advanced augmentation strategies.
 
 ### Observed Errors
-- **Ambiguous Gestures:** Some misclassifications occurred due to gestures that were not part of the training set but resembled existing classes. For instance, when a subject raised both hands straight up, the model classified it as Traffic All Stop.
+
+One notable category of errors involved ambiguous gestures—gestures not explicitly part of the training set but resembling existing classes. For instance, when a subject raised both hands straight up, the model sometimes classified it as the "Traffic All Stop" gesture. Such errors highlight the need for additional gesture diversity in the training data and the introduction of mechanisms to handle ambiguous or unknown gestures.
 
 ### Why This Approach is Sufficietly Tested (but can be improved)
 
 I believe the final programs are sufficiently tested because they were evaluated on a separate, unseen dataset of real-world drone footage. This dataset simulates the intended deployment scenario by introducing natural variations in environment, lighting, and perspective. Moreover, the test data has been carefully crafted to include a representative range of gestures relevant to drone control. By keeping the test data entirely isolated during training, I ensured an unbiased evaluation of the model's performance, providing confidence that the results reflect its robustness and real-world applicability.
 
-However, the model can be improved a lot, which you can see in the following point. 
+However, there is substantial room for improvement. For example, expanding the dataset to include additional gestures and introducing new classes to address unknown or ambiguous gestures would enhance the system's adaptability. These improvements would be essential for scaling the system to more complex use cases.
 
 ### Proposed Improvements (before we actually put this on our drones)
 
@@ -240,13 +243,24 @@ However, the model can be improved a lot, which you can see in the following poi
 - **Model Architecture Adjustments:** Fine-tune the YOLO model to detect not just bounding boxes but also specific gesture-related features.
 - **Post-Processing:** Implement a confidence threshold for classification. For gestures with low confidence, classify them as “unknown” or request re-performance.
 
+These improvements would significantly enhance the system's reliability and scalability, ensuring it performs well across a wider range of scenarios.
+
 ### Presentation Materials
 
 - **Pipeline Overview:**: I use a YOLO model, trained specifically for detecting people from drones, which I obtained from Arturo, my labmate. The YOLO model identifies bounding boxes around individuals in the drone footage. For each detected bounding box, I extract the corresponding region of the frame and pass it to MediaPipe for keypoint detection. MediaPipe outputs keypoints in the Body33 format, which I then convert to the Body25 format to match the input structure required by my classifier. Finally, I feed the transformed 25 keypoints into the classifier, which labels the frame based on the identified gesture.
+
+#### Demonstration
 
 - To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the unseen test set. The video demonstration is available here:
 
 [https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing](https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing)
 
-
 In the video, the individual begins by holding a Touchdown pose for 3 seconds, followed by a T-pose for 3 seconds, which signals the drop of medical equipment. Next, the individual raises their left hand for 3 seconds and their right hand for 3 seconds, representing the command to fly upward. These commands are basic examples and will be enhanced with additional gestures in the future. This demonstration showcases the current capabilities for this class. Note that the animations in the video were manually performed for demonstration purposes.
+
+#### Presentation Video
+
+The video linked below is a recording of me providing a high-level explanation of the system, showcasing the key components and outcomes of the work I’ve done over the semester. It is designed to be short and illustrative, offering a clear overview of the project while highlighting its practical applications. Please feel free to click the link below to watch the video and see the system in action.
+
+[Video](link to video)
+
+

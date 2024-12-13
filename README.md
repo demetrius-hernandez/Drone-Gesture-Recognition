@@ -228,11 +228,11 @@ The results indicated minimal differences between the training/validation perfor
 
 ### Observed Errors
 
-One notable category of errors involved ambiguous gestures—gestures not explicitly part of the training set but resembling existing classes. For instance, when a subject raised both hands straight up, the model sometimes classified it as the "Traffic All Stop" gesture. Such errors highlight the need for additional gesture diversity in the training data and the introduction of mechanisms to handle ambiguous or unknown gestures.
+One notable category of errors involved ambiguous gestures—gestures not explicitly part of the training set but resembling existing classes. For instance, when a subject raised both hands straight up, the model classified it as the "Traffic All Stop" gesture. Such errors highlight the need for additional gesture diversity in the training data and the introduction of mechanisms to handle ambiguous or unknown gestures.
 
 ### Why This Approach is Sufficietly Tested (but can be improved)
 
-I believe the final programs are sufficiently tested because they were evaluated on a separate, unseen dataset of real-world drone footage. This dataset simulates the intended deployment scenario by introducing natural variations in environment, lighting, and perspective. Moreover, the test data has been carefully crafted to include a representative range of gestures relevant to drone control. By keeping the test data entirely isolated during training, I ensured an unbiased evaluation of the model's performance, providing confidence that the results reflect its robustness and real-world applicability.
+I believe the final programs are sufficiently tested because they were evaluated on a separate, unseen dataset of real-world drone footage. This dataset simulates the intended deployment scenario by introducing natural variations in environment. Moreover, the test data has been carefully crafted to include a representative range of gestures relevant to drone control. By keeping the test data entirely isolated during training, I ensured an unbiased evaluation of the model's performance, providing confidence that the results reflect its robustness and real-world applicability.
 
 However, there is substantial room for improvement. For example, expanding the dataset to include additional gestures and introducing new classes to address unknown or ambiguous gestures would enhance the system's adaptability. These improvements would be essential for scaling the system to more complex use cases.
 
@@ -251,15 +251,15 @@ These improvements would significantly enhance the system's reliability and scal
 
 #### Demonstration
 
-- To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the unseen test set. The video demonstration is available here:
+- To demonstrate the project’s functionality, I prepared a short video showcasing the model’s performance on the unseen test set. The video demonstration is available below.
+
+In the video, the individual begins by holding a Touchdown pose for 3 seconds, followed by a T-pose for 3 seconds, which signals the drop of medical equipment. Next, the individual raises their left hand for 3 seconds and their right hand for 3 seconds, representing the command to fly upward. These commands are basic examples and will be enhanced with additional gestures in the future. This demonstration showcases the current capabilities for this class. Note that the animations in the video were manually performed for demonstration purposes because our drones are expensive and require more testing before putting code onboard.
 
 [https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing](https://drive.google.com/file/d/1YGL4H4ETyiUt7bXlNK8EGFDmGjgHk2sy/view?usp=sharing)
 
-In the video, the individual begins by holding a Touchdown pose for 3 seconds, followed by a T-pose for 3 seconds, which signals the drop of medical equipment. Next, the individual raises their left hand for 3 seconds and their right hand for 3 seconds, representing the command to fly upward. These commands are basic examples and will be enhanced with additional gestures in the future. This demonstration showcases the current capabilities for this class. Note that the animations in the video were manually performed for demonstration purposes.
-
 #### Presentation Video
 
-The video linked below is a recording of me providing a high-level explanation of the system, showcasing the key components and outcomes of the work I’ve done over the semester. It is designed to be short and illustrative, offering a clear overview of the project while highlighting its practical applications. Please feel free to click the link below to watch the video and see the system in action.
+The video linked below is a recording of me providing a high-level explanation of the system, showcasing the key components and outcomes of the work I’ve done over the semester. It is designed to be short and illustrative, offering a clear overview of the project while highlighting its practical applications. Please feel free to click the link below to watch the video.
 
 [Video](link to video)
 

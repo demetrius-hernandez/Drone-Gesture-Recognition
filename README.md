@@ -215,6 +215,8 @@ For the final evaluation, I collected a test dataset comprising drone footage of
 
 - **Perspective:** The training/test/validation datasets primarily consisted of keypoints derived from static, ground-level images. In contrast, this unseen dataset features aerial drone footage, which introduces perspective distortion and changes in the appearance of gestures.
 
+I currently don’t have a Classification Report or Confusion Matrix for the unseen test set because I don’t have a fully annotated unseen test set to generate these metrics. My current train/test data is based on static keypoints, while the unseen data would ideally consist of real-world drone footage. Creating a robust unseen test set would require manually labeling the frames from this footage, which is a time-intensive process. However, based on qualitative analysis (and as demonstrated in the video at the end), the solution performs well, maintaining stable classifications and avoiding misclassifications.
+
 ### Observed Overfitting and Implications
 
 The results indicated minimal differences between the training/validation performance and the unseen dataset accuracy. This consistency suggests that while the model is likely overfitting to the training data, the poses in this dataset are distinct enough for the overfitting to have little practical effect. However, this may not hold as the complexity of gestures increases. For example:

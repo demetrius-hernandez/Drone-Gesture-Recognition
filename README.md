@@ -261,6 +261,6 @@ In the video, the individual begins by holding a Touchdown pose for 3 seconds, f
 
 The video linked below is a recording of me providing a high-level explanation of the system, showcasing the key components and outcomes of the work I’ve done over the semester. It is designed to be short and illustrative, offering a clear overview of the project while highlighting its practical applications. Please feel free to click the link below to watch the video.
 
-[Video](link to video)
+[https://drive.google.com/file/d/1qaCXH-tTHMY2VjiJkPDkOSui3GjgAqd7/view?usp=sharing](https://drive.google.com/file/d/1qaCXH-tTHMY2VjiJkPDkOSui3GjgAqd7/view?usp=sharing)
 
 
